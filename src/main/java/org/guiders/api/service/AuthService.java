@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.guiders.api.domain.Account;
 import org.guiders.api.domain.Follower;
 import org.guiders.api.domain.Guider;
+import org.guiders.api.exception.WrongAccountException;
 import org.guiders.api.payload.AuthDto;
 import org.guiders.api.repository.FollowerRepository;
 import org.guiders.api.repository.GuiderRepository;
@@ -19,6 +20,22 @@ public class AuthService {
     private final ModelMapper modelMapper;
     private final GuiderRepository guiderRepository;
     private final FollowerRepository followerRepository;
+
+    public AuthDto.LoginResponse login(AuthDto.LoginRequest request) {
+
+        Account account = null;
+        if (request.getUserType().equals("guider")) {
+            account = guiderRepository.findByEmailAndPassword(request.getEmail(), request.getPassword())
+                    .orElseThrow(() -> new WrongAccountException());
+        } else {
+            account = followerRepository.findByEmailAndPassword(request.getEmail(), request.getPassword())
+                    .orElseThrow(() -> new WrongAccountException());
+        }
+
+        AuthDto.LoginResponse result = modelMapper.map(account, AuthDto.LoginResponse.class);
+
+        return result;
+    }
 
     public Long join(AuthDto.@Valid JoinRequest request) {
 

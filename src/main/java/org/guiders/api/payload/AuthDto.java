@@ -19,4 +19,20 @@ public class AuthDto {
         private String userType;
     }
 
+    @Data
+    public static class LoginRequest {
+        @NotEmpty
+        private String email;
+        @NotEmpty
+        private String password;
+        @NotEmpty
+        private String userType;
+    }
+
+    @Data
+    public static class LoginResponse {
+        private String email;
+        private String username;
+    }
+
 }

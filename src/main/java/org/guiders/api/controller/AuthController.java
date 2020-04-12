@@ -1,6 +1,7 @@
 package org.guiders.api.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.guiders.api.domain.Account;
 import org.guiders.api.payload.AuthDto;
 import org.guiders.api.service.AuthService;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,14 @@ public class AuthController {
                 .toUri();
 
         return ResponseEntity.created(location).build();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@Valid @RequestBody AuthDto.LoginRequest request) {
+
+        AuthDto.LoginResponse loggedAccount = authService.login(request);
+
+        return ResponseEntity.ok(loggedAccount);
     }
 
 }
