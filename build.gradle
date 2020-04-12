@@ -27,6 +27,7 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     runtimeOnly 'mysql:mysql-connector-java'
+    compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.6'
 
 }
 

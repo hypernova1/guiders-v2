@@ -1,8 +1,10 @@
 package org.guiders.api.repository;
 
-import org.guiders.api.domain.Guider;
+import org.guiders.api.domain.Follower;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface GuiderRepository extends JpaRepository<Guider, Long> {
+public interface FollowerRepository extends JpaRepository<Follower, Long> {
+
     int countByEmail(String email);
+
 }
