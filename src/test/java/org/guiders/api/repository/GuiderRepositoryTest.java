@@ -15,8 +15,11 @@ class GuiderRepositoryTest {
 
     @Test
     public void insert() {
-        Guider guider = new Guider();
-        guider.setUsername("sam");
+        Guider guider = Guider.builder()
+                .email("hypemova@gmail.com")
+                .password("1111")
+                .username("sam")
+                .build();
 
         Guider savedGuider = guiderRepository.save(guider);
 

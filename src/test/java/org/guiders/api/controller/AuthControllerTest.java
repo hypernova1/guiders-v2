@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -30,10 +29,11 @@ class AuthControllerTest {
 
     @BeforeEach
     void insertDB() {
-        Guider guider = new Guider();
-        guider.setEmail("chtlstjd01@naver.com");
-        guider.setPassword("1111");
-        guider.setUsername("melchor");
+        Guider guider = Guider.builder()
+                .email("chtlstjd01@naver.com")
+                .password("1111")
+                .username("melchor")
+                .build();
         guiderRepository.save(guider);
     }
 
