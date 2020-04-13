@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -63,6 +64,21 @@ class AuthControllerTest {
         String json = new ObjectMapper().writeValueAsString(requestDto);
 
         mockMvc.perform(post("/auth/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void checkEmail() throws Exception {
+        AuthDto.EmailRequest request = new AuthDto.EmailRequest();
+        request.setEmail("hypemova@gmail.com");
+        request.setUserType("guider");
+
+        String json = new ObjectMapper().writeValueAsString(request);
+
+        mockMvc.perform(get("/auth/check-email")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
                 .andDo(print())

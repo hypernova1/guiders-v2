@@ -2,8 +2,10 @@ spring:
   datasource:
     username: root
     password: 1111
-    url: jdbc:mysql://localhost:3306/guiders
+    url: jdbc:mysql://localhost:3306/guiders?useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 4
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

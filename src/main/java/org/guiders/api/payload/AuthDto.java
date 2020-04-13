@@ -35,4 +35,12 @@ public class AuthDto {
         private String username;
     }
 
+    @Data
+    public static class EmailRequest {
+        @NotEmpty
+        private String userType;
+        @NotEmpty
+        private String email;
+    }
+
 }

@@ -53,4 +53,15 @@ public class AuthService {
         return account.getId();
     }
 
+    public int checkEmail(AuthDto.EmailRequest request) {
+
+        int result = 0;
+        if (request.getUserType().equals("guider")) {
+            result = guiderRepository.countByEmail(request.getEmail());
+        } else {
+            result = followerRepository.countByEmail(request.getEmail());
+        }
+
+        return result;
+    }
 }
