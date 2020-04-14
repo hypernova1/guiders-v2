@@ -27,15 +27,15 @@ class AuthControllerTest {
     @Autowired
     private GuiderRepository guiderRepository;
 
-    @BeforeEach
-    void insertDB() {
-        Guider guider = Guider.builder()
-                .email("chtlstjd01@naver.com")
-                .password("1111")
-                .username("melchor")
-                .build();
-        guiderRepository.save(guider);
-    }
+//    @BeforeEach
+//    void insertDB() {
+//        Guider guider = Guider.builder()
+//                .email("chtlstjd01@naver.com")
+//                .password("1111")
+//                .username("melchor")
+//                .build();
+//        guiderRepository.save(guider);
+//    }
 
     @Test
     void join() throws Exception {

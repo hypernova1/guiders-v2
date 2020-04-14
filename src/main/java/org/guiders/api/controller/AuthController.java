@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.ServletContextListener;
 import javax.validation.Valid;
 import java.net.URI;
 
@@ -35,8 +36,8 @@ public class AuthController {
 
         if (accountId == null) return ResponseEntity.badRequest().build();
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{accountId}")
+        URI location = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/account/{accountId}")
                 .buildAndExpand(accountId)
                 .toUri();
 
