@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.guiders.api.payload.GuiderDto;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -26,4 +27,8 @@ public class Guider extends Account {
         super(email, username, password);
     }
 
+    public void update(GuiderDto.DetailRequest request) {
+        super.username = request.getUsername();
+        super.password = request.getPassword();
+    }
 }

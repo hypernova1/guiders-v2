@@ -31,10 +31,12 @@ public class AccountService {
 
     public List<AccountDto.InfoResponse> getAccountList(int page, int size) {
 
-        Page<Account> accountList = accountRepository
-                .findAll(PageRequest.of(page - 1, size, Sort.by("id").descending()));
+        PageRequest pageable = PageRequest.of(page - 1, size, Sort.by("id").descending());
+        Page<Account> accounts = accountRepository
+                .findAll(pageable);
 
-        return accountList.getContent().stream().map(account -> modelMapper.map(account, AccountDto.InfoResponse.class))
+        return accounts.getContent().stream()
+                .map(account -> modelMapper.map(account, AccountDto.InfoResponse.class))
                 .collect(Collectors.toList());
     }
 }

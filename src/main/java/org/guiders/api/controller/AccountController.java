@@ -15,9 +15,9 @@ public class AccountController {
 
     private final AccountService accountService;
 
-    @GetMapping("/{accountId}")
-    public ResponseEntity<AccountDto.InfoResponse> getAccount(@PathVariable Long accountId) {
-        AccountDto.InfoResponse accountDto = accountService.getAccount(accountId);
+    @GetMapping("/{id}")
+    public ResponseEntity<AccountDto.InfoResponse> getAccount(@PathVariable Long id) {
+        AccountDto.InfoResponse accountDto = accountService.getAccount(id);
         return ResponseEntity.ok(accountDto);
     }
 
