@@ -14,10 +14,10 @@ import javax.persistence.MappedSuperclass;
 @NoArgsConstructor
 public abstract class Post extends DateAudit {
 
-    private String title;
+    protected String title;
     @Lob
-    private String content;
-    private Long likeCnt;
-    private Long hits;
+    protected String content;
+    protected int likeCnt;
+    protected int hits;
 
 }

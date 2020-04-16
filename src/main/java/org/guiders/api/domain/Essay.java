@@ -20,7 +20,7 @@ public class Essay extends Post {
 
     @Builder
     public Essay(String title, String content, EssayType essayType, Guider guider) {
-        super(title, content, 0L, 0L);
+        super(title, content, 0, 0);
         this.essayType = essayType;
         this.guider = guider;
     }
