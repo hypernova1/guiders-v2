@@ -17,17 +17,24 @@ public class Question extends Post {
     @ManyToOne
     private Follower follower;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private  Answer answer;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "question")
+    private Answer answer;
+
+    private int hits;
+    private int lickCnt;
 
     @Builder
-    public Question(String title, String content, int likeCnt, int hits, Follower follower) {
-        super(title, content, likeCnt, hits);
+    public Question(String title, String content, Follower follower) {
+        super(title, content);
         this.follower = follower;
     }
 
     public void setFollower(Follower follower) {
         this.follower = follower;
+    }
+    public void setAnswer(Answer answer) {
+        answer.setQuestion(this);
+        this.answer = answer;
     }
 
 }

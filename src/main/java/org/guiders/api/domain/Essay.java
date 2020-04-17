@@ -18,9 +18,12 @@ public class Essay extends Post {
     @ManyToOne
     private Guider guider;
 
+    protected int likeCnt;
+    protected int hits;
+
     @Builder
     public Essay(String title, String content, EssayType essayType, Guider guider) {
-        super(title, content, 0, 0);
+        super(title, content);
         this.essayType = essayType;
         this.guider = guider;
     }

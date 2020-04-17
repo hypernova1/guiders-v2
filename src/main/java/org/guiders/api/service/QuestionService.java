@@ -1,8 +1,13 @@
 package org.guiders.api.service;
 
 import lombok.RequiredArgsConstructor;
+import org.guiders.api.domain.Answer;
+import org.guiders.api.domain.Guider;
 import org.guiders.api.domain.Question;
+import org.guiders.api.exception.PostNotFoundException;
+import org.guiders.api.payload.AnswerDto;
 import org.guiders.api.payload.FollowerDto;
+import org.guiders.api.payload.GuiderDto;
 import org.guiders.api.payload.QuestionDto;
 import org.guiders.api.repository.QuestionRepository;
 import org.modelmapper.ModelMapper;
@@ -35,5 +40,25 @@ public class QuestionService {
 
         return questionList;
 
+    }
+
+    public QuestionDto.DetailResponse getDetail(Long id) {
+
+        Question question = questionRepository.findById(id)
+                .orElseThrow(PostNotFoundException::new);
+
+        QuestionDto.DetailResponse questionDto = modelMapper.map(question, QuestionDto.DetailResponse.class);
+
+        if (question.getAnswer() != null) {
+            Answer answer = question.getAnswer();
+            Guider guider = answer.getGuider();
+            AnswerDto.Response answerDto = modelMapper.map(answer, AnswerDto.Response.class);
+            GuiderDto.DetailResponse guiderDto = modelMapper.map(guider, GuiderDto.DetailResponse.class);
+
+            answerDto.setGuider(guiderDto);
+            questionDto.setAnswer(answerDto);
+        }
+
+        return questionDto;
     }
 }

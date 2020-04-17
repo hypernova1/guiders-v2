@@ -9,6 +9,7 @@ public class AnswerDto {
         private Long id;
         private String title;
         private String content;
+        private GuiderDto.DetailResponse guider;
     }
 
 }

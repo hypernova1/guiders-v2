@@ -17,7 +17,6 @@ public abstract class Post extends DateAudit {
     protected String title;
     @Lob
     protected String content;
-    protected int likeCnt;
-    protected int hits;
+
 
 }
