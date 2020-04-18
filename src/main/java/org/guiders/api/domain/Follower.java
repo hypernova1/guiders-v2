@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Follower extends Account {
 
-    @OneToMany(mappedBy = "follower")
+    @OneToMany(mappedBy = "writer")
     private List<Question> questions;
 
     @Builder

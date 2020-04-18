@@ -20,4 +20,17 @@ public class QuestionDto {
         private AnswerDto.Response answer;
     }
 
+    @Data
+    public static class Request {
+        private String title;
+        private String content;
+        private Long guiderId;
+    }
+
+    @Data
+    public static class UpdateRequest {
+        private String title;
+        private String content;
+    }
+
 }
