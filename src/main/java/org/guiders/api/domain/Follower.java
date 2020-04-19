@@ -8,6 +8,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -17,11 +18,11 @@ import java.util.List;
 public class Follower extends Account {
 
     @OneToMany(mappedBy = "writer")
-    private List<Question> questions;
+    private List<Question> questions = new ArrayList<>();
 
     @Builder
-    public Follower(String email, String username, String password, String userType) {
-        super(email, username, password, userType);
+    public Follower(String email, String username, String password) {
+        super(email, username, password);
     }
 
     public void addQuestion(Question question) {

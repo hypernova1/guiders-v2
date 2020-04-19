@@ -1,6 +1,7 @@
 package org.guiders.api.payload;
 
 import lombok.Data;
+import org.guiders.api.domain.Question;
 
 public class QuestionDto {
 
@@ -8,7 +9,7 @@ public class QuestionDto {
     public static class Response {
         private Long id;
         private String title;
-        private FollowerDto.Response follower;
+        private FollowerDto.Response writer;
     }
 
     @Data
@@ -16,7 +17,7 @@ public class QuestionDto {
         private Long id;
         private String title;
         private String content;
-        private FollowerDto.Response follower;
+        private FollowerDto.Response writer;
         private AnswerDto.Response answer;
     }
 

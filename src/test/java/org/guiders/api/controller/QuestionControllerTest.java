@@ -57,13 +57,13 @@ class QuestionControllerTest {
                 .content("content")
                 .writer(follower)
                 .build();
+
         savedQuestion = questionRepository.save(question);
 
         Answer answer = Answer.builder()
                 .content("content")
-                .title("title")
                 .question(question)
-                .guider(guider)
+                .writer(guider)
                 .build();
 //        savedQuestion.setAnswer(answer);
 //        answerRepository.save(answer);

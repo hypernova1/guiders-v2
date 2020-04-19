@@ -39,14 +39,14 @@ public class QuestionService {
 
         Page<Question> questions = questionRepository.findAll(pageable);
 
-        List<QuestionDto.Response> questionList = questions.getContent().stream()
-                .map(q -> modelMapper.map(q, QuestionDto.Response.class))
+        return questions.getContent()
+                .stream()
+                .map(q -> {
+                    QuestionDto.Response questionDto = modelMapper.map(q, QuestionDto.Response.class);
+                    questionDto.setWriter(modelMapper.map(q.getWriter(), FollowerDto.Response.class));
+                    return questionDto;
+                })
                 .collect(Collectors.toList());
-
-        questionList.forEach(q -> q.setFollower(modelMapper.map(q.getFollower(), FollowerDto.Response.class)));
-
-        return questionList;
-
     }
 
     public QuestionDto.DetailResponse getDetail(Long id) {
@@ -58,7 +58,7 @@ public class QuestionService {
 
         if (question.getAnswer() != null) {
             Answer answer = question.getAnswer();
-            Guider guider = answer.getGuider();
+            Guider guider = answer.getWriter();
             AnswerDto.Response answerDto = modelMapper.map(answer, AnswerDto.Response.class);
             GuiderDto.DetailResponse guiderDto = modelMapper.map(guider, GuiderDto.DetailResponse.class);
 

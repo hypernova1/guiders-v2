@@ -1,33 +1,32 @@
 package org.guiders.api.domain;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.guiders.api.domain.audit.DateAudit;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 @Getter
-@NoArgsConstructor
-public class Answer extends Post {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Answer extends DateAudit {
+
+    @Lob
+    private String content;
 
     @ManyToOne
-    private Guider guider;
+    private Guider writer;
 
     @OneToOne(fetch = FetchType.EAGER)
     private Question question;
 
     @Builder
-    public Answer(String title, String content, Guider guider, Question question) {
-        super(title, content);
-        this.guider = guider;
+    protected Answer(String content, Guider writer, Question question) {
+        this.content = content;
+        this.writer = writer;
         this.question = question;
     }
 
-    public void setQuestion(Question question) {
-        this.question = question;
-    }
 }
