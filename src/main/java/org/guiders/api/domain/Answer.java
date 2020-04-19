@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.guiders.api.domain.audit.DateAudit;
+import org.guiders.api.payload.AnswerDto;
 
 import javax.persistence.*;
 
@@ -29,4 +30,11 @@ public class Answer extends DateAudit {
         this.question = question;
     }
 
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    public void update(AnswerDto.UpdateRequest request) {
+        this.content = request.getContent();
+    }
 }
