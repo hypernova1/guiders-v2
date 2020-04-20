@@ -6,12 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.guiders.api.domain.audit.DateAudit;
 import org.guiders.api.payload.QuestionDto;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Where(clause = "delete_flag=false")
 public class Question extends DateAudit {
 
     private String title;

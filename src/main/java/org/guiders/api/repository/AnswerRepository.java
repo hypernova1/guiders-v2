@@ -10,4 +10,5 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
     @Query("UPDATE #{#entityName} e set e.deleteFlag=true WHERE e.id=?1")
     @Modifying
     void softDelete(Long id);
+
 }

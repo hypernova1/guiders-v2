@@ -1,9 +1,13 @@
 package org.guiders.api.repository;
 
 import org.guiders.api.domain.Question;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
 
@@ -11,4 +15,11 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     @Modifying
     void softDelete(Long id);
 
+//    @Override
+//    @Query("SELECT e FROM #{#entityName} e where e.deleteFlag=false")
+//    List<Question> findAll();
+//
+//    @Override
+//    @Query("SELECT e FROM #{#entityName} e where e.deleteFlag=false")
+//    Page<Question> findAll(Pageable pageable);
 }
