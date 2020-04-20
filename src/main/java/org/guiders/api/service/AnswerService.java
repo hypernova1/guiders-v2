@@ -48,4 +48,11 @@ public class AnswerService {
 
         return modelMapper.map(answer, AnswerDto.Response.class);
     }
+
+    @Transactional
+    public void delete(Long id) {
+
+        answerRepository.softDelete(id);
+
+    }
 }

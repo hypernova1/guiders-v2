@@ -94,4 +94,9 @@ public class QuestionService {
 
         return question.getId();
     }
+
+    @Transactional
+    public void delete(Long id) {
+        questionRepository.softDelete(id);
+    }
 }

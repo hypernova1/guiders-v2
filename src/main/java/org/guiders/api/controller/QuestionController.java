@@ -63,5 +63,13 @@ public class QuestionController {
         return ResponseEntity.ok(questionDto);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+
+        questionService.delete(id);
+
+        return ResponseEntity.ok().build();
+    }
+
 
 }

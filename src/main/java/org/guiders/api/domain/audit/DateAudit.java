@@ -26,4 +26,6 @@ public abstract class DateAudit {
     @LastModifiedDate
     private Date updatedDate;
 
+    private Boolean deleteFlag;
+
 }

@@ -20,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -110,6 +111,13 @@ class QuestionControllerTest {
         mockMvc.perform(put("/question/" + 3)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(json))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void delete_() throws Exception {
+        mockMvc.perform(delete("/question/" + savedQuestion.getId()))
                 .andDo(print())
                 .andExpect(status().isOk());
     }

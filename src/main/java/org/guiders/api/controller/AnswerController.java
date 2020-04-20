@@ -42,5 +42,13 @@ public class AnswerController {
        return ResponseEntity.ok(answerDto);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+
+        answerService.delete(id);
+
+        return ResponseEntity.ok().build();
+    }
+
 
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.guiders.api.domain.audit.DateAudit;
 import org.guiders.api.payload.AnswerDto;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -36,5 +37,9 @@ public class Answer extends DateAudit {
 
     public void update(AnswerDto.UpdateRequest request) {
         this.content = request.getContent();
+    }
+
+    public void delete() {
+
     }
 }
