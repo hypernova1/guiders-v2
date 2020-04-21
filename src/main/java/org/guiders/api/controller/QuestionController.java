@@ -3,6 +3,8 @@ package org.guiders.api.controller;
 import lombok.RequiredArgsConstructor;
 import org.guiders.api.payload.QuestionDto;
 import org.guiders.api.service.QuestionService;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -23,7 +25,8 @@ public class QuestionController {
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size) {
 
-        List<QuestionDto.Response> questionList = questionService.getList(page, size);
+        List<QuestionDto.Response> questionList = questionService
+                .getList(PageRequest.of(page - 1, size, Sort.by("id").descending()));
 
         return ResponseEntity.ok(questionList);
     }

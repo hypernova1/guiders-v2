@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Where(clause = "delete_flag=false")
 public class Answer extends DateAudit {
 
     @Lob
@@ -39,7 +40,4 @@ public class Answer extends DateAudit {
         this.content = request.getContent();
     }
 
-    public void delete() {
-
-    }
 }

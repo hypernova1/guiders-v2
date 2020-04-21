@@ -17,6 +17,11 @@ public class AuthDto {
         private String password;
         @NotEmpty
         private String userType;
+
+        public boolean isGuider() {
+            return userType.equals("guider");
+        }
+
     }
 
     @Data
@@ -27,6 +32,10 @@ public class AuthDto {
         private String password;
         @NotEmpty
         private String userType;
+
+        public boolean isGuider() {
+            return userType.equals("guider");
+        }
     }
 
     @Data

@@ -35,7 +35,7 @@ public class GuiderService {
 
         PageRequest pageable = PageRequest.of(page - 1, size, Sort.by("id").descending());
 
-        Page<Guider> guiders = guiderRepository.findAll(pageable);
+        Page<Guider> guiders = this.guiderRepository.findAll(pageable);
 
         return guiders.getContent().stream()
                 .map(guider -> modelMapper.map(guider, GuiderDto.DetailResponse.class))

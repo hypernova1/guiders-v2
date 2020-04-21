@@ -23,24 +23,22 @@ public class AuthService {
 
     public AuthDto.LoginResponse login(AuthDto.LoginRequest request) {
 
-        Account account = null;
-        if (request.getUserType().equals("guider")) {
+        Account account;
+        if (request.isGuider()) {
             account = guiderRepository.findByEmailAndPassword(request.getEmail(), request.getPassword())
-                    .orElseThrow(() -> new WrongAccountException());
+                    .orElseThrow(WrongAccountException::new);
         } else {
             account = followerRepository.findByEmailAndPassword(request.getEmail(), request.getPassword())
-                    .orElseThrow(() -> new WrongAccountException());
+                    .orElseThrow(WrongAccountException::new);
         }
 
-        AuthDto.LoginResponse result = modelMapper.map(account, AuthDto.LoginResponse.class);
-
-        return result;
+        return modelMapper.map(account, AuthDto.LoginResponse.class);
     }
 
     public Long join(AuthDto.@Valid JoinRequest request) {
 
         Account account = null;
-        if (request.getUserType().equals("guider")) {
+        if (request.isGuider()) {
             if (guiderRepository.countByEmail(request.getEmail()) > 0) return null;
             Guider guider = modelMapper.map(request, Guider.class);
             account = guiderRepository.save(guider);

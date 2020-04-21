@@ -41,8 +41,8 @@ public class Question extends DateAudit {
         this.guider = guider;
     }
 
-    public void setFollower(Follower follower) {
-        this.writer = follower;
+    public void setWriter(Follower writer) {
+        this.writer = writer;
     }
     public void setGuider(Guider guider) {
         this.guider = guider;
@@ -52,4 +52,9 @@ public class Question extends DateAudit {
         this.title = request.getTitle();
         this.content = request.getContent();
     }
+
+    public boolean answerNotEmpty() {
+        return answer != null;
+    }
+
 }

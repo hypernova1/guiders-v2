@@ -13,15 +13,11 @@ import org.guiders.api.payload.QuestionDto;
 import org.guiders.api.repository.GuiderRepository;
 import org.guiders.api.repository.QuestionRepository;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.config.Configuration;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,11 +29,9 @@ public class QuestionService {
     private final QuestionRepository questionRepository;
     private final GuiderRepository guiderRepository;
 
-    public List<QuestionDto.Response> getList(int page, int size) {
+    public List<QuestionDto.Response> getList(PageRequest pageRequest) {
 
-        PageRequest pageable = PageRequest.of(page - 1, size, Sort.by("id").descending());
-
-        Page<Question> questions = questionRepository.findAll(pageable);
+        Page<Question> questions = this.questionRepository.findAll(pageRequest);
 
         return questions.getContent()
                 .stream()
@@ -45,8 +39,7 @@ public class QuestionService {
                     QuestionDto.Response questionDto = modelMapper.map(q, QuestionDto.Response.class);
                     questionDto.setWriter(modelMapper.map(q.getWriter(), FollowerDto.Response.class));
                     return questionDto;
-                })
-                .collect(Collectors.toList());
+                }).collect(Collectors.toList());
     }
 
     public QuestionDto.DetailResponse getDetail(Long id) {
@@ -56,7 +49,7 @@ public class QuestionService {
 
         QuestionDto.DetailResponse questionDto = modelMapper.map(question, QuestionDto.DetailResponse.class);
 
-        if (question.getAnswer() != null) {
+        if (!question.answerNotEmpty()) {
             Answer answer = question.getAnswer();
             Guider guider = answer.getWriter();
             AnswerDto.Response answerDto = modelMapper.map(answer, AnswerDto.Response.class);
@@ -83,7 +76,7 @@ public class QuestionService {
     }
 
     @Transactional
-    public Long update(@Valid QuestionDto.UpdateRequest request, Long id) {
+    public Long update(QuestionDto.UpdateRequest request, Long id) {
 
         Question question = questionRepository.findById(id)
                 .orElseThrow(PostNotFoundException::new);

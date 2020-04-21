@@ -8,7 +8,6 @@ import org.guiders.api.repository.AccountRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public class AccountService {
     private final ModelMapper modelMapper;
     private final AccountRepository accountRepository;
 
-    public AccountDto.InfoResponse getAccount(Long accountId) {
+    public AccountDto.InfoResponse get(Long accountId) {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(AccountNotFoundException::new);
         return modelMapper.map(account, AccountDto.InfoResponse.class);
@@ -29,14 +28,13 @@ public class AccountService {
 
     }
 
-    public List<AccountDto.InfoResponse> getAccountList(int page, int size) {
+    public List<AccountDto.InfoResponse> getList(PageRequest pageRequest) {
 
-        PageRequest pageable = PageRequest.of(page - 1, size, Sort.by("id").descending());
-        Page<Account> accounts = accountRepository
-                .findAll(pageable);
+        Page<Account> accounts = this.accountRepository.findAll(pageRequest);
 
         return accounts.getContent().stream()
                 .map(account -> modelMapper.map(account, AccountDto.InfoResponse.class))
                 .collect(Collectors.toList());
     }
+
 }

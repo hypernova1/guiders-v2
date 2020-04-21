@@ -26,7 +26,7 @@ public class Follower extends Account {
     }
 
     public void addQuestion(Question question) {
-        question.setFollower(this);
+        question.setWriter(this);
         questions.add(question);
     }
 }
