@@ -43,13 +43,14 @@ public class QuestionController {
     public ResponseEntity<?> register(@Valid @RequestBody QuestionDto.Request request) {
 
         Long questionId = questionService.register(request);
+        QuestionDto.DetailResponse createdQuestion = questionService.getDetail(questionId);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(questionId)
                 .toUri();
 
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(location).body(createdQuestion);
     }
 
     @PutMapping("/{id}")
@@ -57,11 +58,11 @@ public class QuestionController {
             @PathVariable Long id,
             @Valid @RequestBody QuestionDto.UpdateRequest request) {
 
-        Long questionId = questionService.update(request, id);
+        boolean isUpdate = questionService.update(request, id);
 
-        if (questionId == null) return ResponseEntity.badRequest().build();
+        if (!isUpdate) return ResponseEntity.badRequest().build();
 
-        QuestionDto.DetailResponse questionDto = questionService.getDetail(questionId);
+        QuestionDto.DetailResponse questionDto = questionService.getDetail(id);
 
         return ResponseEntity.ok(questionDto);
     }

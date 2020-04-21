@@ -49,7 +49,7 @@ public class QuestionService {
 
         QuestionDto.DetailResponse questionDto = modelMapper.map(question, QuestionDto.DetailResponse.class);
 
-        if (!question.answerNotEmpty()) {
+        if (question.answerNotEmpty()) {
             Answer answer = question.getAnswer();
             Guider guider = answer.getWriter();
             AnswerDto.Response answerDto = modelMapper.map(answer, AnswerDto.Response.class);
@@ -67,25 +67,23 @@ public class QuestionService {
         Guider guider = guiderRepository.findById(request.getGuiderId())
                 .orElseThrow(AccountNotFoundException::new);
 
-        Question question = modelMapper.map(request, Question.class);
-        question.setGuider(guider);
-
+        Question question = Question.toEntity(request, guider);
         Question savedQuestion = questionRepository.save(question);
 
         return savedQuestion.getId();
     }
 
     @Transactional
-    public Long update(QuestionDto.UpdateRequest request, Long id) {
+    public boolean update(QuestionDto.UpdateRequest request, Long id) {
 
         Question question = questionRepository.findById(id)
                 .orElseThrow(PostNotFoundException::new);
 
-        if (question.getAnswer() != null) return null;
+        if (question.answerNotEmpty()) return false;
 
         question.update(request);
 
-        return question.getId();
+        return true;
     }
 
     @Transactional

@@ -41,11 +41,16 @@ public class Question extends DateAudit {
         this.guider = guider;
     }
 
+    public static Question toEntity(QuestionDto.Request request, Guider guider) {
+        return Question.builder()
+                .title(request.getTitle())
+                .content(request.getContent())
+                .guider(guider)
+                .build();
+    }
+
     public void setWriter(Follower writer) {
         this.writer = writer;
-    }
-    public void setGuider(Guider guider) {
-        this.guider = guider;
     }
 
     public void update(QuestionDto.UpdateRequest request) {

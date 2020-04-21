@@ -2,7 +2,10 @@ package org.guiders.api.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.guiders.api.domain.Account;
+import org.guiders.api.payload.AccountDto;
 import org.guiders.api.payload.AuthDto;
+import org.guiders.api.repository.AccountRepository;
+import org.guiders.api.service.AccountService;
 import org.guiders.api.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,13 +21,14 @@ import java.net.URI;
 public class AuthController {
 
     private final AuthService authService;
+    private final AccountService accountService;
 
     @GetMapping("/check-email")
     public ResponseEntity<?> checkEmail(@Valid @RequestBody AuthDto.EmailRequest request) {
 
-        int result = authService.checkEmail(request);
+        boolean isDuplicated = authService.isEmailDuplicated(request.getEmail());
 
-        if (result > 0) return ResponseEntity.badRequest().build();
+        if (isDuplicated) return ResponseEntity.badRequest().build();
 
         return ResponseEntity.ok().build();
     }
@@ -47,7 +51,13 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody AuthDto.LoginRequest request) {
 
-        AuthDto.LoginResponse loggedAccount = authService.login(request);
+        boolean result = authService.isValid(request);
+
+        if (!result) {
+            return ResponseEntity.notFound().build();
+        }
+
+        AccountDto.InfoResponse loggedAccount = accountService.get(request.getEmail());
 
         return ResponseEntity.ok(loggedAccount);
     }

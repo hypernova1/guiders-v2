@@ -24,8 +24,13 @@ public class AccountService {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(AccountNotFoundException::new);
         return modelMapper.map(account, AccountDto.InfoResponse.class);
+    }
 
+    public AccountDto.InfoResponse get(String email) {
+        Account account = accountRepository.findByEmail(email)
+                .orElseThrow(AccountNotFoundException::new);
 
+        return modelMapper.map(account, AccountDto.InfoResponse.class);
     }
 
     public List<AccountDto.InfoResponse> getList(PageRequest pageRequest) {

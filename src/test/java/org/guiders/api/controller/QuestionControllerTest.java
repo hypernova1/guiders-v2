@@ -12,6 +12,7 @@ import org.guiders.api.repository.FollowerRepository;
 import org.guiders.api.repository.GuiderRepository;
 import org.guiders.api.repository.QuestionRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -71,6 +72,7 @@ class QuestionControllerTest {
     }
 
     @Test
+    @DisplayName("질문 목록을 가져온다.")
     void getList() throws Exception {
         mockMvc.perform(get("/question"))
                 .andDo(print())
@@ -78,6 +80,7 @@ class QuestionControllerTest {
     }
 
     @Test
+    @DisplayName("질문 상세보기 내용을 가져온다.")
     void getDetail() throws Exception {
         mockMvc.perform(get("/question/" + savedQuestion.getId()))
                 .andDo(print())
@@ -85,10 +88,14 @@ class QuestionControllerTest {
     }
 
     @Test
+    @DisplayName("질문을 등록한다.")
     void register() throws Exception {
+        String title = "question 입니다";
+        String content = "내용입니다.";
+
         QuestionDto.Request request = new QuestionDto.Request();
-        request.setTitle("question 입니다");
-        request.setContent("내용입니다.");
+        request.setTitle(title);
+        request.setContent(content);
         request.setGuiderId(1L);
 
         String json = new ObjectMapper().writeValueAsString(request);
@@ -97,14 +104,20 @@ class QuestionControllerTest {
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(json))
                 .andDo(print())
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.title", is(title)))
+                .andExpect(jsonPath("$.content", is(content)));
     }
 
     @Test
+    @DisplayName("질문 정보를 수정한다.")
     void update() throws Exception {
+        String title = "question 입니다";
+        String content = "내용입니다.";
+
         QuestionDto.UpdateRequest request = new QuestionDto.UpdateRequest();
-        request.setTitle("question 입니다");
-        request.setContent("내용입니다.");
+        request.setTitle(title);
+        request.setContent(content);
 
         String json = new ObjectMapper().writeValueAsString(request);
 
@@ -112,10 +125,13 @@ class QuestionControllerTest {
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(json))
                 .andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title", is(title)))
+                .andExpect(jsonPath("$.content", is(content)));
     }
 
     @Test
+    @DisplayName("질문을 삭제한다.")
     void delete_() throws Exception {
         mockMvc.perform(delete("/question/" + savedQuestion.getId()))
                 .andDo(print())

@@ -5,6 +5,7 @@ import org.guiders.api.domain.Guider;
 import org.guiders.api.payload.GuiderDto;
 import org.guiders.api.repository.GuiderRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -34,7 +35,7 @@ class GuiderControllerTest {
     @BeforeEach
     void insertDB() {
         Guider guider = Guider.builder()
-                .email("chtlstjd01@gmail.com")
+                .email("hypernova1@naver.com")
                 .username("sam")
                 .password("1111")
                 .build();
@@ -42,6 +43,7 @@ class GuiderControllerTest {
     }
 
     @Test
+    @DisplayName("가이더의 정보를 가져온다.")
     void getDetail() throws Exception {
 
         mockMvc.perform(get("/guider/" + savedGuider.getId()))
@@ -50,6 +52,7 @@ class GuiderControllerTest {
     }
 
     @Test
+    @DisplayName("가이더 목록을 가져온다.")
     void getList() throws Exception {
         mockMvc.perform(get("/guider"))
                 .andDo(print())
@@ -57,6 +60,7 @@ class GuiderControllerTest {
     }
 
     @Test
+    @DisplayName("가이더의 정보를 변경한다.")
     void update() throws Exception {
 
         GuiderDto.DetailRequest request = new GuiderDto.DetailRequest();

@@ -47,8 +47,6 @@ public class AuthDto {
     @Data
     public static class EmailRequest {
         @NotEmpty
-        private String userType;
-        @NotEmpty
         private String email;
     }
 

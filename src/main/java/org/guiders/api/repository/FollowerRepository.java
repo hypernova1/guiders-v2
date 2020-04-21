@@ -7,7 +7,5 @@ import java.util.Optional;
 
 public interface FollowerRepository extends JpaRepository<Follower, Long> {
 
-    int countByEmail(String email);
-
-    Optional<Follower> findByEmailAndPassword(String email, String password);
+    int countByEmailAndPassword(String email, String password);
 }

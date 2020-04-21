@@ -3,6 +3,7 @@ package org.guiders.api.controller;
 import org.guiders.api.domain.Guider;
 import org.guiders.api.repository.GuiderRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -32,7 +33,7 @@ public class AccountControllerTest {
     @BeforeEach
     void insertDB() {
         Guider guider = Guider.builder()
-                .email("chtlstjd01@gmail.com")
+                .email("chtlstjd01@naver.com")
                 .username("sam")
                 .password("1111")
                 .build();
@@ -40,6 +41,7 @@ public class AccountControllerTest {
     }
 
     @Test
+    @DisplayName("계정 정보를 가져온다.")
     void getAccount() throws Exception {
         mockMvc.perform(get("/account/" + savedGuider.getId()))
                 .andDo(print())
@@ -47,11 +49,12 @@ public class AccountControllerTest {
     }
 
     @Test
+    @DisplayName("계정 리스트를 가져온다.")
     void getAccountList() throws Exception {
         mockMvc.perform(get("/account"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)));
+                .andExpect(jsonPath("$").isNotEmpty());
     }
 
 }
