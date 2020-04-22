@@ -18,7 +18,8 @@ class GuiderRepositoryTest {
         Guider guider = Guider.builder()
                 .email("hypemova@gmail.com")
                 .password("1111")
-                .username("sam")
+                .firstName("sam chan")
+                .lastName("park")
                 .build();
 
         Guider savedGuider = guiderRepository.save(guider);

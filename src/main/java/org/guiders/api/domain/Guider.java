@@ -23,12 +23,12 @@ public class Guider extends Account {
     List<Essay> essays = new ArrayList<>();
 
     @Builder
-    public Guider(String email, String username, String password) {
-        super(email, username, password);
+    public Guider(String email, String firstName, String lastName, String password) {
+        super(email, new Name(firstName, lastName), password);
     }
 
     public void update(GuiderDto.DetailRequest request) {
-        super.username = request.getUsername();
+        super.name = new Name(request.getFirstName(), request.getLastName());
         super.password = request.getPassword();
     }
 }

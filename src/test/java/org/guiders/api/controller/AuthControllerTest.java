@@ -33,7 +33,8 @@ class AuthControllerTest {
         Guider guider = Guider.builder()
                 .email("chtlstjd01@naver.com")
                 .password("1111")
-                .username("melchor")
+                .firstName("melchor")
+                .lastName("morgoth")
                 .build();
         guiderRepository.save(guider);
     }

@@ -34,7 +34,8 @@ public class AccountControllerTest {
     void insertDB() {
         Guider guider = Guider.builder()
                 .email("chtlstjd01@naver.com")
-                .username("sam")
+                .firstName("sam")
+                .lastName("last")
                 .password("1111")
                 .build();
         savedGuider = guiderRepository.save(guider);

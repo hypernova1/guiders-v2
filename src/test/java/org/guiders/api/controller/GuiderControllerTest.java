@@ -36,7 +36,8 @@ class GuiderControllerTest {
     void insertDB() {
         Guider guider = Guider.builder()
                 .email("hypernova1@naver.com")
-                .username("sam")
+                .firstName("sam")
+                .lastName("lasttt")
                 .password("1111")
                 .build();
         savedGuider = guiderRepository.save(guider);
@@ -64,7 +65,8 @@ class GuiderControllerTest {
     void update() throws Exception {
 
         GuiderDto.DetailRequest request = new GuiderDto.DetailRequest();
-        request.setUsername("sam cham");
+        request.setFirstName("sam cham");
+        request.setLastName("kwon");
         request.setPassword("3333");
         String json = new ObjectMapper().writeValueAsString(request);
 

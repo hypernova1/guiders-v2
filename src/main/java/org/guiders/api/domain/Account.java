@@ -17,14 +17,17 @@ public abstract class Account extends DateAudit {
 
     @Column(unique = true, updatable = false)
     private String email;
-    protected String username;
+
+    @Embedded
+    protected Name name;
+
     protected String password;
     @Column(name = "user_type", insertable = false, updatable = false)
     private String userType;
 
-    protected Account(String email, String username, String password) {
+    protected Account(String email, Name name, String password) {
         this.email = email;
-        this.username = username;
+        this.name = name;
         this.password = password;
     }
 

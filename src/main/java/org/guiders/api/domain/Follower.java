@@ -21,8 +21,8 @@ public class Follower extends Account {
     private List<Question> questions = new ArrayList<>();
 
     @Builder
-    public Follower(String email, String username, String password) {
-        super(email, username, password);
+    public Follower(String email, String firstName, String lastName, String password) {
+        super(email, new Name(firstName, lastName), password);
     }
 
     public void addQuestion(Question question) {

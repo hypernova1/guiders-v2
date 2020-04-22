@@ -26,14 +26,16 @@ public class Application {
         return args -> {
             Guider guider = Guider.builder()
                     .email("chtlstjd01@gmail.com")
-                    .username("sam")
+                    .firstName("sam chan")
+                    .lastName("kwon")
                     .password("1111")
                     .build();
              guiderRepository.save(guider);
 
             Follower follower = Follower.builder()
                     .email("follower@naver.com")
-                    .username("foll")
+                    .firstName("foll")
+                    .lastName("lastt")
                     .password("1111")
                     .build();
 
