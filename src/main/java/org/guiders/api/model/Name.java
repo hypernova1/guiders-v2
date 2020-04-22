@@ -1,4 +1,4 @@
-package org.guiders.api.domain;
+package org.guiders.api.model;
 
 import lombok.*;
 

@@ -2,6 +2,7 @@ package org.guiders.api.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.guiders.api.domain.Guider;
+import org.guiders.api.model.Name;
 import org.guiders.api.payload.AuthDto;
 import org.guiders.api.repository.GuiderRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,7 +47,7 @@ class AuthControllerTest {
         requestDto.setEmail("hypemova@gmail.com");
         requestDto.setPassword("1111");
         requestDto.setUserType("guider");
-        requestDto.setUsername("sam");
+        requestDto.setUsername(new Name("sam", "kwon"));
         String json = new ObjectMapper().writeValueAsString(requestDto);
 
         mockMvc.perform(post("/auth/join")
@@ -63,7 +64,7 @@ class AuthControllerTest {
         requestDto.setEmail("chtlstjd01@naver.com");
         requestDto.setPassword("1111");
         requestDto.setUserType("guider");
-        requestDto.setUsername("sam");
+        requestDto.setUsername(new Name("sam", "kwon"));
         String json = new ObjectMapper().writeValueAsString(requestDto);
 
         mockMvc.perform(post("/auth/join")

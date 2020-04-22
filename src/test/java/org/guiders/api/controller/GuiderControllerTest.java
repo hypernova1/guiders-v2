@@ -2,6 +2,7 @@ package org.guiders.api.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.guiders.api.domain.Guider;
+import org.guiders.api.model.Name;
 import org.guiders.api.payload.GuiderDto;
 import org.guiders.api.repository.GuiderRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -65,8 +66,7 @@ class GuiderControllerTest {
     void update() throws Exception {
 
         GuiderDto.DetailRequest request = new GuiderDto.DetailRequest();
-        request.setFirstName("sam cham");
-        request.setLastName("kwon");
+        request.setUsername(new Name("samch", "park"));
         request.setPassword("3333");
         String json = new ObjectMapper().writeValueAsString(request);
 

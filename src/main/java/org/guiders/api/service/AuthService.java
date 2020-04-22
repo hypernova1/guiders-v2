@@ -9,6 +9,7 @@ import org.guiders.api.repository.AccountRepository;
 import org.guiders.api.repository.FollowerRepository;
 import org.guiders.api.repository.GuiderRepository;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,6 +32,7 @@ public class AuthService {
 
         Account account;
         if (request.isGuider()) {
+
             Guider guider = modelMapper.map(request, Guider.class);
             account = guiderRepository.save(guider);
             return account.getId();

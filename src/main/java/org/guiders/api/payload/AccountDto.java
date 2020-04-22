@@ -1,6 +1,7 @@
 package org.guiders.api.payload;
 
 import lombok.Data;
+import org.guiders.api.model.Name;
 
 public class AccountDto {
 
@@ -8,7 +9,7 @@ public class AccountDto {
     public static class InfoResponse {
         private Long id;
         private String email;
-        private String username;
+        private Name username;
         private String userType;
     }
 

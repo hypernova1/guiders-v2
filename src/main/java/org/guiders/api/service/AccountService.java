@@ -6,6 +6,7 @@ import org.guiders.api.exception.AccountNotFoundException;
 import org.guiders.api.payload.AccountDto;
 import org.guiders.api.repository.AccountRepository;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ public class AccountService {
     private final AccountRepository accountRepository;
 
     public AccountDto.InfoResponse get(Long accountId) {
+
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(AccountNotFoundException::new);
         return modelMapper.map(account, AccountDto.InfoResponse.class);

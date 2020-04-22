@@ -1,6 +1,7 @@
 package org.guiders.api.payload;
 
 import lombok.Data;
+import org.guiders.api.model.Name;
 
 public class GuiderDto {
 
@@ -9,8 +10,7 @@ public class GuiderDto {
 
     @Data
     public static class DetailRequest {
-        private String firstName;
-        private String lastName;
+        private Name username;
         private String password;
     }
 
@@ -18,7 +18,7 @@ public class GuiderDto {
     public static class Response {
         private Long id;
         private String email;
-        private String username;
+        private Name username;
     }
 
 

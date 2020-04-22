@@ -40,12 +40,14 @@ public class AuthController {
 
         if (accountId == null) return ResponseEntity.badRequest().build();
 
+        AccountDto.InfoResponse accountDto = accountService.get(accountId);
+
         URI location = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/account/{accountId}")
                 .buildAndExpand(accountId)
                 .toUri();
 
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(location).body(accountDto);
     }
 
     @PostMapping("/login")

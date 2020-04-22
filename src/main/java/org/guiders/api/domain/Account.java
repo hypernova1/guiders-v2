@@ -1,10 +1,10 @@
 package org.guiders.api.domain;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.guiders.api.domain.audit.DateAudit;
+import org.guiders.api.model.Name;
 
 import javax.persistence.*;
 
@@ -19,16 +19,19 @@ public abstract class Account extends DateAudit {
     private String email;
 
     @Embedded
-    protected Name name;
+    protected Name username;
 
     protected String password;
     @Column(name = "user_type", insertable = false, updatable = false)
     private String userType;
 
-    protected Account(String email, Name name, String password) {
+    protected Account(String email, Name username, String password) {
         this.email = email;
-        this.name = name;
+        this.username = username;
         this.password = password;
     }
 
+    public void setUsername(Name username) {
+        this.username = username;
+    }
 }

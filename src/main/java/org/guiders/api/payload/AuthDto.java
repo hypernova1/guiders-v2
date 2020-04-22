@@ -1,8 +1,10 @@
 package org.guiders.api.payload;
 
 import lombok.Data;
+import org.guiders.api.model.Name;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class AuthDto {
 
@@ -11,8 +13,8 @@ public class AuthDto {
 
         @NotEmpty
         private String email;
-        @NotEmpty
-        private String username;
+        @NotNull
+        private Name username;
         @NotEmpty
         private String password;
         @NotEmpty
