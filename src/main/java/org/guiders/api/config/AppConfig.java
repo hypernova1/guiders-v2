@@ -1,8 +1,6 @@
 package org.guiders.api.config;
 
 import org.guiders.api.domain.Account;
-import org.guiders.api.domain.Guider;
-import org.guiders.api.payload.AccountDto;
 import org.guiders.api.payload.AuthDto;
 import org.guiders.api.payload.GuiderDto;
 import org.modelmapper.ModelMapper;

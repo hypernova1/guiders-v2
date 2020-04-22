@@ -32,7 +32,6 @@ public class AuthService {
 
         Account account;
         if (request.isGuider()) {
-
             Guider guider = modelMapper.map(request, Guider.class);
             account = guiderRepository.save(guider);
             return account.getId();

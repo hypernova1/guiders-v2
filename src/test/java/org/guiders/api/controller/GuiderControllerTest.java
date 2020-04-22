@@ -58,7 +58,7 @@ class GuiderControllerTest {
     void getList() throws Exception {
         mockMvc.perform(get("/guider"))
                 .andDo(print())
-                .andExpect(jsonPath("$", hasSize(1)));
+                .andExpect(jsonPath("$").isNotEmpty());
     }
 
     @Test
