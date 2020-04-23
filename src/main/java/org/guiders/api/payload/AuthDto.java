@@ -52,4 +52,8 @@ public class AuthDto {
         private String email;
     }
 
+    @Data
+    public static class PasswordRequest {
+        private String email;
+    }
 }

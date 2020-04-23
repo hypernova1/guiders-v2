@@ -7,6 +7,18 @@ spring:
     hikari:
       maximum-pool-size: 4
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: chtlstjd01@gmail.com
+    password: kgnqyqooouvkjrzk
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     generate-ddl: true

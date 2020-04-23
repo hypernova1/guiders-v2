@@ -1,17 +1,14 @@
 package org.guiders.api.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.guiders.api.domain.Account;
 import org.guiders.api.payload.AccountDto;
 import org.guiders.api.payload.AuthDto;
-import org.guiders.api.repository.AccountRepository;
 import org.guiders.api.service.AccountService;
 import org.guiders.api.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.ServletContextListener;
 import javax.validation.Valid;
 import java.net.URI;
 
@@ -62,6 +59,16 @@ public class AuthController {
         AccountDto.InfoResponse loggedAccount = accountService.get(request.getEmail());
 
         return ResponseEntity.ok(loggedAccount);
+    }
+
+    @GetMapping("/password/{email}")
+    public ResponseEntity<?> password(@PathVariable String email) {
+
+        boolean result = authService.sendPassword(email);
+
+        if (!result) return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok().build();
     }
 
 }

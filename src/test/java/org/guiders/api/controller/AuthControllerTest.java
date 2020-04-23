@@ -32,7 +32,7 @@ class AuthControllerTest {
     @BeforeEach
     void insertDB() {
         Guider guider = Guider.builder()
-                .email("chtlstjd01@naver.com")
+                .email("hypemova@gmail.com")
                 .password("1111")
                 .firstName("melchor")
                 .lastName("morgoth")
@@ -104,6 +104,15 @@ class AuthControllerTest {
                 .content(json))
                 .andDo(print())
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    @DisplayName("비밀번호 찾기 메일 발송 테스트")
+    void findPassword() throws Exception {
+
+        mockMvc.perform(get("/auth/password/hypemova@gmail.com"))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 
 }

@@ -6,7 +6,6 @@ import org.guiders.api.exception.AccountNotFoundException;
 import org.guiders.api.payload.AccountDto;
 import org.guiders.api.repository.AccountRepository;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;

@@ -8,8 +8,8 @@ import org.guiders.api.payload.AuthDto;
 import org.guiders.api.repository.AccountRepository;
 import org.guiders.api.repository.FollowerRepository;
 import org.guiders.api.repository.GuiderRepository;
+import org.guiders.api.util.GMailSender;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,10 +20,11 @@ public class AuthService {
     private final AccountRepository accountRepository;
     private final GuiderRepository guiderRepository;
     private final FollowerRepository followerRepository;
+    private final GMailSender mailSender;
 
     public boolean isValid(AuthDto.LoginRequest request) {
         return accountRepository
-                .countByEmailAndPassword(request.getEmail(), request.getPassword()) == 1;
+                .existsByEmailAndPassword(request.getEmail(), request.getPassword());
     }
 
     public Long join(AuthDto.JoinRequest request) {
@@ -44,6 +45,16 @@ public class AuthService {
     }
 
     public boolean isEmailDuplicated(String email) {
-        return accountRepository.countByEmail(email) > 0;
+        return accountRepository.existsByEmail(email);
+    }
+
+    public boolean sendPassword(String email) {
+        boolean isExist = accountRepository.existsByEmail(email);
+
+        if (!isExist) return false;
+
+        mailSender.sendPassword(email);
+
+        return true;
     }
 }
