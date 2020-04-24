@@ -31,5 +31,5 @@ out/
 ### VS Code ###
 .vscode/
 
-src/main/resources/application.yaml
+src/main/resources/application-dev.yaml
 src/main/.DS_Store
