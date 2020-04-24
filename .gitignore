@@ -32,3 +32,4 @@ out/
 .vscode/
 
 src/main/resources/application.yaml
+src/main/.DS_Store
