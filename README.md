@@ -11,6 +11,21 @@
 * Spring Data JPA
 * Spring Security
 * MySQL
+* Docker
+* Elastic Search
 
 ### Front-end
 * React.js
+* Redux
+
+
+### 기능
+* 가이더 / 멘티 매칭
+* 질문 / 답변
+* 에세이 작성
+* 소셜로그인 연동
+* 지역별 스터디룸 정보 출력 
+* 결제 기능(미확정)
+* 1:1 채팅
+* 푸쉬 알림
+* 멘토 찾기
