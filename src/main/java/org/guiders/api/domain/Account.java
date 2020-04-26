@@ -7,6 +7,8 @@ import org.guiders.api.domain.audit.DateAudit;
 import org.guiders.api.model.Name;
 
 import javax.persistence.*;
+import java.time.Instant;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -25,6 +27,8 @@ public abstract class Account extends DateAudit {
     @Column(name = "user_type", insertable = false, updatable = false)
     private String userType;
 
+    private Instant lastLoginDate;
+
     protected Account(String email, Name username, String password) {
         this.email = email;
         this.username = username;
@@ -33,5 +37,9 @@ public abstract class Account extends DateAudit {
 
     public void setUsername(Name username) {
         this.username = username;
+    }
+
+    public void updateLoginDate() {
+        this.lastLoginDate = Instant.now();
     }
 }

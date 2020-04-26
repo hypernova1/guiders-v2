@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.guiders.api.domain.Account;
 import org.guiders.api.domain.Follower;
 import org.guiders.api.domain.Guider;
+import org.guiders.api.exception.AccountNotFoundException;
 import org.guiders.api.payload.AuthDto;
 import org.guiders.api.repository.AccountRepository;
 import org.guiders.api.repository.FollowerRepository;
@@ -11,6 +12,8 @@ import org.guiders.api.repository.GuiderRepository;
 import org.guiders.api.util.GMailSender;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,8 +26,13 @@ public class AuthService {
     private final GMailSender mailSender;
 
     public boolean isValid(AuthDto.LoginRequest request) {
-        return accountRepository
-                .existsByEmailAndPassword(request.getEmail(), request.getPassword());
+        Account loggedAccount = accountRepository
+                .findByEmailAndPassword(request.getEmail(), request.getPassword())
+                .orElseThrow(AccountNotFoundException::new);
+
+        loggedAccount.updateLoginDate();
+
+        return true;
     }
 
     public Long join(AuthDto.JoinRequest request) {
