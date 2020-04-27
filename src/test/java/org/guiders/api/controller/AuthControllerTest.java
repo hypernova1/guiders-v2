@@ -46,7 +46,7 @@ class AuthControllerTest {
     @DisplayName("회원가입 테스트")
     void join() throws Exception {
         AuthDto.JoinRequest requestDto = new AuthDto.JoinRequest();
-        requestDto.setEmail("hypemova@gmail.com");
+        requestDto.setEmail("hypemova2@gmail.com");
         requestDto.setPassword("1111");
         requestDto.setUserType("guider");
         requestDto.setUsername(new Name("sam", "kwon"));
@@ -63,7 +63,7 @@ class AuthControllerTest {
     @DisplayName("회원가입 중복 테스트")
     void join2() throws Exception {
         AuthDto.JoinRequest requestDto = new AuthDto.JoinRequest();
-        requestDto.setEmail("chtlstjd01@naver.com");
+        requestDto.setEmail("hypemova@gmail.com");
         requestDto.setPassword("1111");
         requestDto.setUserType("guider");
         requestDto.setUsername(new Name("sam", "kwon"));
@@ -81,7 +81,7 @@ class AuthControllerTest {
     void login() throws Exception {
 
         AuthDto.LoginRequest requestDto = new AuthDto.LoginRequest();
-        requestDto.setEmail("chtlstjd01@naver.com");
+        requestDto.setEmail("hypemova@gmail.com");
         requestDto.setPassword("1111");
         requestDto.setUserType("guider");
         String json = new ObjectMapper().writeValueAsString(requestDto);
