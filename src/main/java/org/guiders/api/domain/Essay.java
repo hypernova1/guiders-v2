@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.guiders.api.constant.EssayType;
 import org.guiders.api.domain.audit.DateAudit;
+import org.guiders.api.payload.EssayDto;
 
 import javax.persistence.*;
 
@@ -48,5 +49,10 @@ public class Essay extends DateAudit {
     }
     public void deceaseLikeCnt() {
         this.likeCnt--;
+    }
+
+    public void update(EssayDto.UpdateRequest essayDto) {
+        this.title = essayDto.getTitle();
+        this.content = essayDto.getContent();
     }
 }

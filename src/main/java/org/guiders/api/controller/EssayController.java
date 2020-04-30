@@ -9,6 +9,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/essay")
@@ -16,7 +17,6 @@ import java.net.URI;
 public class EssayController {
 
     private final EssayService essayService;
-
 
     @PostMapping
     public ResponseEntity<?> resister(@Valid @RequestBody EssayDto.ResisterRequest request) {
@@ -33,9 +33,29 @@ public class EssayController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getDetail() {
+    public ResponseEntity<?> getDetail(@PathVariable Long id) {
+        EssayDto.ResponseDetail essay = essayService.getDetail(id);
+        return ResponseEntity.ok(essay);
+    }
 
-        return null;
+    @GetMapping
+    public ResponseEntity<?> getList(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        List<EssayDto.Response> essayList = essayService.getList(page, size);
+
+        return ResponseEntity.ok(essayList);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id,
+                                    @RequestBody EssayDto.UpdateRequest request) {
+
+        essayService.update(id, request);
+        EssayDto.ResponseDetail essayDto = essayService.getDetail(id);
+
+        return ResponseEntity.ok(essayDto);
     }
 
 }
