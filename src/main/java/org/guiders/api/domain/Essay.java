@@ -36,4 +36,17 @@ public class Essay extends DateAudit {
         this.essayType = essayType;
         this.guider = guider;
     }
+
+    public void increaseHits() {
+        this.hits++;
+    }
+    public void decreaseHits() {
+        this.hits--;
+    }
+    public void increaseLikeCnt() {
+        this.likeCnt++;
+    }
+    public void deceaseLikeCnt() {
+        this.likeCnt--;
+    }
 }

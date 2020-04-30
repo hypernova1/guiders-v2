@@ -8,11 +8,14 @@ public class EssayDto {
 
     @Data
     public static class ResisterRequest {
-
         @NotEmpty
         private String title;
         @NotEmpty
         private String content;
+    }
+
+    @Data
+    public static class ResponseDetail {
 
     }
 

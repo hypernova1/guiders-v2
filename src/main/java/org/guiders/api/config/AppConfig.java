@@ -1,7 +1,9 @@
 package org.guiders.api.config;
 
 import org.guiders.api.domain.Account;
+import org.guiders.api.domain.Comment;
 import org.guiders.api.payload.AuthDto;
+import org.guiders.api.payload.CommentDto;
 import org.guiders.api.payload.GuiderDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
