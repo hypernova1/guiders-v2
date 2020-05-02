@@ -52,14 +52,12 @@ public class EssayService {
 
         Page<Essay> essays = essayRepository.findAll(pageRequest);
 
-        List<EssayDto.Response> essayList = essays.getContent().stream().map(essay -> {
+        return essays.getContent().stream().map(essay -> {
             GuiderDto.Response guiderDto = modelMapper.map(essay.getGuider(), GuiderDto.Response.class);
             EssayDto.Response essayDto = modelMapper.map(essay, EssayDto.Response.class);
             essayDto.setWriter(guiderDto);
             return essayDto;
         }).collect(Collectors.toList());
-
-        return essayList;
     }
 
     @Transactional
