@@ -33,13 +33,13 @@ class AuthControllerTest {
 
     @BeforeEach
     void insertDB() {
-        Guider guider = Guider.builder()
-                .email("hypemova@gmail.com")
-                .password("1111")
-                .firstName("melchor")
-                .lastName("morgoth")
-                .build();
-        guiderRepository.save(guider);
+//        Guider guider = Guider.builder()
+//                .email("hypemova@gmail.com")
+//                .password("1111")
+//                .firstName("melchor")
+//                .lastName("morgoth")
+//                .build();
+//        guiderRepository.save(guider);
     }
 
     @Test
@@ -81,7 +81,7 @@ class AuthControllerTest {
     void login() throws Exception {
 
         AuthDto.LoginRequest requestDto = new AuthDto.LoginRequest();
-        requestDto.setEmail("hypemova@gmail.com");
+        requestDto.setEmail("hypemova2@gmail.com");
         requestDto.setPassword("1111");
         requestDto.setUserType("guider");
         String json = new ObjectMapper().writeValueAsString(requestDto);

@@ -1,7 +1,10 @@
 package org.guiders.api.payload;
 
 import lombok.Data;
+import org.guiders.api.domain.Follower;
+import org.guiders.api.domain.Guider;
 import org.guiders.api.model.Name;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -22,6 +25,24 @@ public class AuthDto {
 
         public boolean isGuider() {
             return userType.equals("guider");
+        }
+
+        public Guider toGuiderEntity() {
+            return Guider.builder()
+                    .email(email)
+                    .password(password)
+                    .firstName(username.getFirst())
+                    .lastName(username.getLast())
+                    .build();
+        }
+
+        public Follower toFollowerEntity() {
+            return Follower.builder()
+                    .email(email)
+                    .password(password)
+                    .firstName(username.getFirst())
+                    .lastName(username.getLast())
+                    .build();
         }
 
     }

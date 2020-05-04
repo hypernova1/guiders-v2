@@ -28,8 +28,8 @@ public abstract class Account extends DateAudit {
     protected Name username;
 
     protected String password;
-    @Column(name = "user_type", insertable = false, updatable = false)
-    private RoleName userType;
+//    @Column(name = "user_type", insertable = false, updatable = false)
+//    private RoleName userType;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",

@@ -17,11 +17,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserPrincipal loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        Account account = accountRepository.findByEmail(username)
+    public UserPrincipal loadUserByUsername(String email) throws UsernameNotFoundException {
+        Account account = accountRepository.findByEmail(email)
                 .orElseThrow(AccountNotFoundException::new);
 
-        return UserPrincipal.build(account);
+        account.updateLoginDate();
+
+        return UserPrincipal.create(account);
     }
 }

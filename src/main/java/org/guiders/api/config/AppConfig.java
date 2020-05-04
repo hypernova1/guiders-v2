@@ -15,13 +15,6 @@ public class AppConfig {
     @Bean
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
-
-        modelMapper.createTypeMap(AuthDto.JoinRequest.class, Account.class)
-                .addMapping(AuthDto.JoinRequest::getUsername, Account::setUsername);
-
-        modelMapper.createTypeMap(GuiderDto.DetailRequest.class, Account.class)
-                .addMapping(GuiderDto.DetailRequest::getUsername, Account::setUsername);
-
         return modelMapper;
     }
 

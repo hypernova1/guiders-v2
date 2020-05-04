@@ -17,6 +17,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Role extends DateAudit {
 
+    @Column(unique = true)
     @Enumerated(EnumType.STRING)
     private RoleName name;
 

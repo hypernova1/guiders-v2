@@ -29,7 +29,7 @@ public class UserPrincipal implements UserDetails {
         this.authorities = authorities;
     }
 
-    public static UserPrincipal build(Account account) {
+    public static UserPrincipal create(Account account) {
         List<GrantedAuthority> authorities = account.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());

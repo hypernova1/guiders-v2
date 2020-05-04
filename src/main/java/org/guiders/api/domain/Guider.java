@@ -3,7 +3,6 @@ package org.guiders.api.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.guiders.api.model.Name;
 import org.guiders.api.payload.GuiderDto;
 
@@ -16,7 +15,6 @@ import java.util.List;
 @Getter
 @Entity
 @DiscriminatorValue("G")
-@ToString
 @NoArgsConstructor
 public class Guider extends Account {
 

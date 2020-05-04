@@ -12,7 +12,6 @@ import org.guiders.api.repository.FollowerRepository;
 import org.guiders.api.repository.GuiderRepository;
 import org.guiders.api.repository.RoleRepository;
 import org.guiders.api.security.JwtUtils;
-import org.guiders.api.security.UserPrincipal;
 import org.guiders.api.util.GMailSender;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,10 +20,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -49,26 +44,20 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generationJwtToken(authentication);
 
-        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-        List<String> roles = userPrincipal.getAuthorities().stream()
-                .map(item -> item.getAuthority())
-                .collect(Collectors.toList());
-
         return jwt;
     }
 
     public Long join(AuthDto.JoinRequest request) {
+        if (isEmailDuplicated(request.getEmail())) return null;
 
         request.setPassword(passwordEncoder.encode(request.getPassword()));
-
-        if (isEmailDuplicated(request.getEmail())) return null;
 
         Account account;
         if (request.isGuider()) {
 
             Role role = roleRepository.findByName(RoleName.ROLE_GUIDER)
                     .orElseThrow(RuntimeException::new);
-            Guider guider = modelMapper.map(request, Guider.class);
+            Guider guider = request.toGuiderEntity();
             guider.getRoles().add(role);
             account = guiderRepository.save(guider);
             return account.getId();
@@ -76,7 +65,7 @@ public class AuthService {
 
         Role role = roleRepository.findByName(RoleName.ROLE_FOLLOWER)
                 .orElseThrow(RuntimeException::new);
-        Follower follower = modelMapper.map(request, Follower.class);
+        Follower follower = request.toFollowerEntity();
         follower.getRoles().add(role);
         account = followerRepository.save(follower);
 

@@ -33,28 +33,27 @@ public class Application {
 
         return args -> {
 
-            Role roleAdmin = new Role(RoleName.ROLE_ADMIN);
-            Role roleGuider = new Role(RoleName.ROLE_GUIDER);
-            Role roleFollower = new Role(RoleName.ROLE_FOLLOWER);
-
-            roleRepository.saveAll(Arrays.asList(roleAdmin, roleFollower, roleGuider));
-
-            Guider guider = Guider.builder()
-                    .email("chtlstjd01@gmail.com")
-                    .firstName("sam chan")
-                    .lastName("kwon")
-                    .password(passwordEncoder.encode("1111"))
-                    .build();
-             guiderRepository.save(guider);
-
-            Follower follower = Follower.builder()
-                    .email("follower@naver.com")
-                    .firstName("foll")
-                    .lastName("lastt")
-                    .password(passwordEncoder.encode("1111"))
-                    .build();
-
-            followerRepository.save(follower);
+//            Role roleAdmin = new Role(RoleName.ROLE_ADMIN);
+//            Role roleGuider = new Role(RoleName.ROLE_GUIDER);
+//            Role roleFollower = new Role(RoleName.ROLE_FOLLOWER);
+//            roleRepository.saveAll(Arrays.asList(roleAdmin, roleFollower, roleGuider));
+//
+//            Guider guider = Guider.builder()
+//                    .email("chtlstjd01@gmail.com")
+//                    .firstName("sam chan")
+//                    .lastName("kwon")
+//                    .password(passwordEncoder.encode("1111"))
+//                    .build();
+//             guiderRepository.save(guider);
+//
+//            Follower follower = Follower.builder()
+//                    .email("follower@naver.com")
+//                    .firstName("foll")
+//                    .lastName("lastt")
+//                    .password(passwordEncoder.encode("1111"))
+//                    .build();
+//
+//            followerRepository.save(follower);
         };
     }
 
