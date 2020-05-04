@@ -3,12 +3,16 @@ package org.guiders.api.domain;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.guiders.api.constant.RoleName;
 import org.guiders.api.domain.audit.DateAudit;
 import org.guiders.api.model.Name;
 
+import javax.jdo.annotations.Join;
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -25,7 +29,13 @@ public abstract class Account extends DateAudit {
 
     protected String password;
     @Column(name = "user_type", insertable = false, updatable = false)
-    private String userType;
+    private RoleName userType;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+                joinColumns = @JoinColumn(name = "user_id"),
+                inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     private Instant lastLoginDate;
 
@@ -38,7 +48,6 @@ public abstract class Account extends DateAudit {
     public void setUsername(Name username) {
         this.username = username;
     }
-
     public void updateLoginDate() {
         this.lastLoginDate = Instant.now();
     }

@@ -3,6 +3,7 @@ package org.guiders.api.controller;
 import lombok.RequiredArgsConstructor;
 import org.guiders.api.payload.AccountDto;
 import org.guiders.api.payload.AuthDto;
+import org.guiders.api.payload.JwtResponse;
 import org.guiders.api.service.AccountService;
 import org.guiders.api.service.AuthService;
 import org.springframework.http.ResponseEntity;
@@ -50,15 +51,11 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody AuthDto.LoginRequest request) {
 
-        boolean result = authService.isValid(request);
-
-        if (!result) {
-            return ResponseEntity.notFound().build();
-        }
+        String jwt = authService.isValid(request);
 
         AccountDto.InfoResponse loggedAccount = accountService.get(request.getEmail());
 
-        return ResponseEntity.ok(loggedAccount);
+        return ResponseEntity.ok(new JwtResponse(jwt, loggedAccount));
     }
 
     @GetMapping("/password/{email}")
