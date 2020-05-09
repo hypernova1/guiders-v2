@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -38,7 +39,7 @@ class GuiderControllerTest {
     @BeforeEach
     void insertDB() {
         Guider guider = Guider.builder()
-                .email("hypernova1@naver.com")
+                .email("hypernova12@naver.com")
                 .firstName("sam")
                 .lastName("lasttt")
                 .password("1111")
@@ -47,6 +48,7 @@ class GuiderControllerTest {
     }
 
     @Test
+    @WithMockUser("test@test.com")
     @DisplayName("가이더의 정보를 가져온다.")
     void getDetail() throws Exception {
 

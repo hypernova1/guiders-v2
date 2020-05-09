@@ -30,6 +30,7 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    testImplementation('org.springframework.security:spring-security-test')
     runtimeOnly 'mysql:mysql-connector-java'
     compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.6'
     compile group: 'com.querydsl', name: 'querydsl-jpa'
